@@ -4,6 +4,7 @@ public class ConnectFour {
     private int[][] gameboard = new int[6][7];
     private Scanner scanner = new Scanner(System.in);
     private boolean gameIsRunning;
+    private boolean placeTile;
     private int scannerInput;
     private int LOWER_BOUND;
     private int UPPER_BOUND;
@@ -50,6 +51,11 @@ public class ConnectFour {
                 else if (scannerInput > UPPER_BOUND) {
                     System.out.println("please input a number between 1 - 7");
                 } else {
+                    this.placeTile = true;
+                    while (placeTile == true) {
+                        
+                    }
+                    
                     System.out.println("|" + gameboard[0][0] + "|" + gameboard[0][1] + "|" + gameboard[0][2] + "|" + gameboard[0][3] + "|" + gameboard[0][4] + "|" + gameboard[0][5] + "|" + gameboard[0][6] + "|");
                     System.out.println("|" + gameboard[1][0] + "|" + gameboard[1][1] + "|" + gameboard[1][2] + "|" + gameboard[1][3] + "|" + gameboard[1][4] + "|" + gameboard[1][5] + "|" + gameboard[1][6] + "|");
                     System.out.println("|" + gameboard[2][0] + "|" + gameboard[2][1] + "|" + gameboard[2][2] + "|" + gameboard[2][3] + "|" + gameboard[2][4] + "|" + gameboard[2][5] + "|" + gameboard[2][6] + "|");
