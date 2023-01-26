@@ -3,6 +3,7 @@ import java.util.InputMismatchException;
 public class ConnectFour {
     private String[][] gameboard = new String[6][7];
     private Scanner scanner = new Scanner(System.in);
+    private Scanner scannerN = new Scanner(System.in);
     private int scannerInput;
     private int scannerVariable;
     private boolean gameIsRunning;
@@ -15,7 +16,7 @@ public class ConnectFour {
         System.out.println("--Use the playConnectFour method to begin game--");
         System.out.println("-- X represents player 1's tiles -- O represents player 2's tiles--");
         System.out.println("--First, type the column that player 1 wishes to place their tile, next player 2 type the column they wish to place a tile--");
-        System.out.println("-- Only type in the numbers/columns 1-7 --");
+        System.out.println("-- Only type in the numbers/columns 1-7 or your turn will be skipped --");
         ConnectFour play = new ConnectFour();
         play.playConnectFour();
     }
@@ -101,8 +102,7 @@ public class ConnectFour {
                                 }
                             }
                         }
-                        
-                        
+
                     }
                 }
             } catch (InputMismatchException error) {
@@ -174,7 +174,7 @@ public class ConnectFour {
                                 }
                             }
                         }
-                        
+
                     }
                 }
             } catch (InputMismatchException error) {
@@ -183,4 +183,100 @@ public class ConnectFour {
             }
         }
     }
+
+    public void playConnectFourRowN(int n) {
+        String[][] gameboardN = new String[n][7];
+        int N = n - 1;
+        
+        for (int i = 0; i < N; i++) {
+            gameboardN[i][0] = " ";
+            gameboardN[i][1] = " ";
+            gameboardN[i][2] = " ";
+            gameboardN[i][3] = " ";
+            gameboardN[i][4] = " ";
+            gameboardN[i][5] = " ";
+            gameboardN[i][6] = " ";
+        }
+        
+        try {
+            scannerInput = scanner.nextInt();
+            scannerVariable = scannerInput - 1;
+            if (scannerInput < LOWER_BOUND) {
+                System.out.println("-- There is no column under the number 1, please put a column from 1-7, player 1's turn has been skipped --");
+            } else if (scannerInput > UPPER_BOUND) {
+                System.out.println("-- There is no column above the number 7, please put a column from 1-7, player 1's turn has been skipped --");
+            } else {
+                this.placeTile = true;
+                this.forLoop = true;
+                while (placeTile == true) {
+                    for (int i = 0; i <= N; i++) {
+                        if (forLoop == true) {    
+                            if (i == N) {
+                                System.out.println("--This column is full, Player 1's turn has been skipped--");
+                                forLoop = false;
+                                placeTile = false;
+                            } else
+                            if (gameboardN[i][scannerVariable].equals(" ")) {
+                                gameboardN[i][scannerVariable] = "X";
+                                forLoop = false;
+                                placeTile = false;
+                            }
+                        }
+                    }
+
+                    for (int i = N; i >= 0; i--) {
+                        System.out.println("| "+gameboard[i][0]+" | "+gameboard[i][1]+" | "+gameboard[i][2]+" | "+gameboard[i][3]+" | "+gameboard[i][4]+" | "+gameboard[i][5]+" | "+gameboard[i][6]+" |");
+                    }
+                    System.out.println("");
+                    System.out.println("- "+"1"+" - "+"2"+" - "+"3"+" - "+"4"+" - "+"5"+" - "+"6"+" - "+"7"+" -");
+
+                }
+            }
+        } catch (InputMismatchException error) {
+            System.out.println("-- Please type the column you wish to play, a number from 1-7, player 1's turn has been skipped --");
+            scanner.next();
+        }
+        
+        // player2
+        
+        try {
+            scannerInput = scanner.nextInt();
+            scannerVariable = scannerInput - 1;
+            if (scannerInput < LOWER_BOUND) {
+                System.out.println("-- There is no column under the number 1, please put a column from 1-7, player 2's turn has been skipped --");
+            } else if (scannerInput > UPPER_BOUND) {
+                System.out.println("-- There is no column above the number 7, please put a column from 1-7, player 2's turn has been skipped --");
+            } else {
+                this.placeTile = true;
+                this.forLoop = true;
+                while (placeTile == true) {
+                    for (int i = 0; i <= N; i++) {
+                        if (forLoop == true) {    
+                            if (i == N) {
+                                System.out.println("--This column is full, Player 2's turn has been skipped--");
+                                forLoop = false;
+                                placeTile = false;
+                            } else
+                            if (gameboardN[i][scannerVariable].equals(" ")) {
+                                gameboardN[i][scannerVariable] = "O";
+                                forLoop = false;
+                                placeTile = false;
+                            }
+                        }
+                    }
+                    
+                    for (int i = N; i >= 0; i--) {
+                        System.out.println("| "+gameboard[i][0]+" | "+gameboard[i][1]+" | "+gameboard[i][2]+" | "+gameboard[i][3]+" | "+gameboard[i][4]+" | "+gameboard[i][5]+" | "+gameboard[i][6]+" |");
+                    }
+                    System.out.println("");
+                    System.out.println("- "+"1"+" - "+"2"+" - "+"3"+" - "+"4"+" - "+"5"+" - "+"6"+" - "+"7"+" -");
+
+                }
+            }
+        } catch (InputMismatchException error) {
+            System.out.println("-- Please type the column you wish to play, a number from 1-7, player 2's turn has been skipped --");
+            scanner.next();
+        }
+    }
 }
+
